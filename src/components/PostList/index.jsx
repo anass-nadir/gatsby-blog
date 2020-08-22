@@ -1,6 +1,5 @@
-/** @jsx jsx */
+import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
-import { jsx } from 'theme-ui'
 
 import { PostList } from './PostList'
 
@@ -17,6 +16,9 @@ export const PostListContainer = () => {
               node {
                 fileAbsolutePath
                 excerpt(pruneLength: 100)
+                fields {
+                  slug
+                }
                 frontmatter {
                   title
                   tags

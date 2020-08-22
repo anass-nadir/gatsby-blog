@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { Fragment } from 'react'
 import { jsx, Flex, Box, Styled } from 'theme-ui'
-
+import { Link } from 'gatsby'
 import { Post } from '../Post'
 
 export const PostList = ({ listItems }) => {
@@ -21,6 +21,7 @@ export const PostList = ({ listItems }) => {
         }}
       >
         {listItems.map((item, index) => {
+          const { slug } = item.node.fields
           return (
             <Box
               key={index}
@@ -43,7 +44,23 @@ export const PostList = ({ listItems }) => {
                   }
                 }}
               >
-                <Post {...item} />
+                <Link
+                  to={slug}
+                  sx={{
+                    display: 'flex',
+                    flex: '1 1 auto',
+                    textDecoration: 'none',
+                    borderRadius: 1,
+                    mb: 4,
+                    ':focus': {
+                      outline: 'none',
+                      boxShadow: theme =>
+                        `${theme.shadows[0]} ${theme.colors.textMuted}`
+                    }
+                  }}
+                >
+                  <Post {...item} />
+                </Link>
               </Styled.div>
             </Box>
           )

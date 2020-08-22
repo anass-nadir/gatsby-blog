@@ -4,8 +4,11 @@ import { StaticQuery, graphql } from 'gatsby'
 import { Global, css } from '@emotion/core'
 import { jsx, Styled } from 'theme-ui'
 import { MDXProvider } from '@mdx-js/react'
+import { Location } from '@reach/router'
 
 import { Seo } from '../components/Seo'
+import { ContentContainer } from '../components/Content'
+import { Transition } from '../components/Transition'
 
 
 const Layout = ({ children }) => {
@@ -52,16 +55,29 @@ const Layout = ({ children }) => {
                 backgroundColor: 'background'
               }}
             >
-              <Seo
-                title={title}
-                description={description}
-                keywords={keywords}
-                siteURL={siteURL}
-                image={siteImage}
-              />
-              <MDXProvider>
-                {children}
-              </MDXProvider>
+              <Location>
+                {({ location }) => {
+                  const { pathname } = location
+                  return (
+                    <Fragment>
+                      <Seo
+                        title={title}
+                        description={description}
+                        keywords={keywords}
+                        siteURL={siteURL}
+                        image={siteImage}
+                      />
+                      <ContentContainer>
+                        <Transition pathname={pathname}>
+                          <MDXProvider>
+                            {children}
+                          </MDXProvider>
+                        </Transition>
+                      </ContentContainer>
+                    </Fragment>
+                  )
+                }}
+              </Location>
             </Styled.div>
           </Fragment>
         )
