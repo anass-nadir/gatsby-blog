@@ -3,6 +3,7 @@ import { Fragment } from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import { Global, css } from '@emotion/core'
 import { jsx, Styled } from 'theme-ui'
+import { MDXProvider } from '@mdx-js/react'
 
 import { Seo } from '../components/Seo'
 
@@ -58,7 +59,9 @@ const Layout = ({ children }) => {
                 siteURL={siteURL}
                 image={siteImage}
               />
-              {children}
+              <MDXProvider>
+                {children}
+              </MDXProvider>
             </Styled.div>
           </Fragment>
         )

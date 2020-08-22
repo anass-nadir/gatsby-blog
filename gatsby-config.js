@@ -1,28 +1,34 @@
-const path = require("path")
-
 module.exports = {
   siteMetadata: {
     title: "gatsby blog",
     description: "gatsby blog test",
     keywords: ["test", "gatsby"],
-    siteURL: "http://localhost:8000/",
+    siteURL: "http://localhost:8000",
     siteImage: ""
   },
   plugins: [
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-theme-ui",
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: "gatsby-plugin-mdx",
       options: {
-        name: "pages",
-        path: path.resolve(__dirname, `src/pages`),
+        extensions: [`.mdx`, `.md`],
       },
     },
     {
-      resolve: 'gatsby-plugin-layout',
+      resolve: "gatsby-plugin-layout",
       options: {
-        component: require.resolve('./src/layouts/layout.jsx')
-      }
+        component: require.resolve("./src/layouts/layout.jsx"),
+      },
     },
-  ],
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "posts",
+        path: `${__dirname}/src/posts`,
+      },
+    }
+  ]
 }
