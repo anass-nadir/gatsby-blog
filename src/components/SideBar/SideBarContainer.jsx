@@ -1,14 +1,17 @@
 /** @jsx jsx */
 import { StaticQuery, graphql } from 'gatsby';
 import { jsx, Styled } from 'theme-ui';
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { SideBarContext } from './SideBarContext'
 import { SideBar } from './SideBar';
 
 export const SideBarContainer = () => {
   const { state, dispatch } = useContext(SideBarContext)
-  const [width, setWidth] = useState(window.innerWidth)
-  window.addEventListener('resize', () => setWidth(window.innerWidth))
+  const [width, setWidth] = useState(null)
+  useEffect(() => {
+    setWidth(window.innerWidth)
+    window.addEventListener('resize', () => setWidth(window.innerWidth))
+  }, [])
   return (
     <StaticQuery
       query={graphql`
