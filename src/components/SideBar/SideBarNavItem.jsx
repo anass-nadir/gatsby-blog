@@ -35,6 +35,6 @@ export const SideBarNavItem = ({ value, count }) => (
         color: 'textMuted',
         margin: '6px 0 0 6px'
       }}
-    >{`${count} post${count > 1 ? 's' : null}`}</Styled.strong>
+    >{`${count} post${count > 1 ? 's' : ''}`}</Styled.strong>
   </Styled.div>
 );
