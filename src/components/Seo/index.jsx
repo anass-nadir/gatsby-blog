@@ -9,7 +9,7 @@ export const Seo = ({
   image,
   path,
   keywords = [],
-  lang = 'eng'
+  lang = 'en'
 }) => (
     <Helmet
       title={title}

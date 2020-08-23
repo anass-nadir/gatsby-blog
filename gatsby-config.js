@@ -3,7 +3,7 @@ module.exports = {
     title: "gatsby blog",
     description: "gatsby blog test",
     keywords: ["test", "gatsby"],
-    siteURL: "http://localhost:8000",
+    siteURL: process.env.NODE_ENV == 'development' ? "http://localhost:8000" : "https://gatsby-blog-orcin.vercel.app",
     siteImage: ""
   },
   plugins: [

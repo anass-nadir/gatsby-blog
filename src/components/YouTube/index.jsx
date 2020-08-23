@@ -22,6 +22,7 @@ export const YouTube = ({ id }) => {
     >
       <iframe
         src={`https://www.youtube.com/embed/${id}`}
+        title={id}
         frameBorder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen

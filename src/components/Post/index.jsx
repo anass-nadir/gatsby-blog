@@ -20,9 +20,6 @@ export const Post = ({ ...props }) => {
   return (
     <article
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        flex: '1 1 auto',
         color: 'text',
         fontFamily: 'body',
         backgroundColor: 'surface',
@@ -34,10 +31,17 @@ export const Post = ({ ...props }) => {
         }
       }}
     >
-      <Img alt={title} fluid={featuredImage.childImageSharp.fluid} />
+      <Styled.div
+        sx={{
+          height: '50%',
+        }}
+      >
+        <Img alt={title} fluid={featuredImage.childImageSharp.fluid} style={{ height: '100%' }} />
+      </Styled.div>
       <Styled.div
         sx={{
           display: 'flex',
+          height: '50%',
           flexDirection: 'column',
           flex: '1 1 auto',
           p: [2, 3]

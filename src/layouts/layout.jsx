@@ -9,6 +9,8 @@ import { Location } from '@reach/router'
 import { Seo } from '../components/Seo'
 import { ContentContainer } from '../components/Content'
 import { Transition } from '../components/Transition'
+import { Header } from '../components/Header'
+import { SideBarContainer, SideBarProvider, Overlay } from '../components/SideBar'
 
 
 const Layout = ({ children }) => {
@@ -55,29 +57,34 @@ const Layout = ({ children }) => {
                 backgroundColor: 'background'
               }}
             >
-              <Location>
-                {({ location }) => {
-                  const { pathname } = location
-                  return (
-                    <Fragment>
-                      <Seo
-                        title={title}
-                        description={description}
-                        keywords={keywords}
-                        siteURL={siteURL}
-                        image={siteImage}
-                      />
-                      <ContentContainer>
-                        <Transition pathname={pathname}>
-                          <MDXProvider>
-                            {children}
-                          </MDXProvider>
-                        </Transition>
-                      </ContentContainer>
-                    </Fragment>
-                  )
-                }}
-              </Location>
+              <SideBarProvider>
+                <Location>
+                  {({ location }) => {
+                    const { pathname } = location
+                    return (
+                      <Fragment>
+                        <Seo
+                          title={title}
+                          description={description}
+                          keywords={keywords}
+                          siteURL={siteURL}
+                          image={siteImage}
+                        />
+                        <Header />
+                        <SideBarContainer />
+                        <Overlay />
+                        <ContentContainer>
+                          <Transition pathname={pathname}>
+                            <MDXProvider>
+                              {children}
+                            </MDXProvider>
+                          </Transition>
+                        </ContentContainer>
+                      </Fragment>
+                    )
+                  }}
+                </Location>
+              </SideBarProvider>
             </Styled.div>
           </Fragment>
         )
