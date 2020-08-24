@@ -24,7 +24,6 @@ const Layout = ({ children }) => {
               description
               keywords
               siteURL
-              siteImage
             }
           }
         }
@@ -34,8 +33,7 @@ const Layout = ({ children }) => {
           title,
           description,
           keywords,
-          siteURL,
-          siteImage
+          siteURL
         } = data.site.siteMetadata
 
         return (
@@ -68,7 +66,6 @@ const Layout = ({ children }) => {
                           description={description}
                           keywords={keywords}
                           siteURL={siteURL}
-                          image={siteImage}
                         />
                         <Header />
                         <SideBarContainer />

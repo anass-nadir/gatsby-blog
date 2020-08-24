@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { Fragment } from 'react'
 import { jsx, Styled, useThemeUI } from 'theme-ui'
+import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
@@ -40,13 +41,13 @@ const Post = ({ data: { mdx, site }, pageContext }) => {
                         title={`${site.siteMetadata.title} | ${title}`}
                         description={excerpt}
                         keywords={tags || []}
-                        siteURL={site.siteMetadata.siteURL}
                         path={fields.slug}
                         image={
                               featuredImage
                                     ? featuredImage.childImageSharp.fluid.src.replace('/', '')
                                     : ''
                         }
+                        article={true}
                   />
                   {featuredImage && (
                         <Styled.div
@@ -136,12 +137,33 @@ const Post = ({ data: { mdx, site }, pageContext }) => {
             </article>
       )
 }
+Post.propTypes = {
+      data: PropTypes.shape({
+        mdx: PropTypes.shape({
+          edges: PropTypes.arrayOf(
+            PropTypes.shape({
+              node: PropTypes.shape({
+                frontmatter: PropTypes.shape({
+                  title: PropTypes.object.isRequired,
+                  featuredImage: PropTypes.object.isRequired,
+                  date: PropTypes.string.isRequired
+                }),
+                fields: PropTypes.shape({
+                  slug: PropTypes.string.isRequired
+                }),
+                excerpt: PropTypes.string.isRequired,
+                body: PropTypes.object.isRequired
+              })
+            }).isRequired
+          )
+        })
+      })
+    };
 export const contentQuery = graphql`
   query postQuery($id: String) {
     site {
       siteMetadata {
         title
-        siteURL
       }
     }
     mdx(id: { eq: $id }) {

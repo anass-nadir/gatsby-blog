@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, Styled } from 'theme-ui';
-
+import { Link } from 'gatsby';
 import { SideBarNavItem } from './SideBarNavItem';
 
 export const SideBarNavList = ({ links }) => (
@@ -24,7 +24,8 @@ export const SideBarNavList = ({ links }) => (
             }
           }}
         >
-          <Styled.a
+          <Link
+            to={`/category/${value}`}
             sx={{
               display: 'block',
               borderRadius: 2,
@@ -41,7 +42,7 @@ export const SideBarNavList = ({ links }) => (
             }}
           >
             <SideBarNavItem value={value} count={count} />
-          </Styled.a>
+          </Link>
         </Styled.li>
       );
     })}

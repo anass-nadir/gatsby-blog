@@ -9,8 +9,15 @@ export const Seo = ({
   image,
   path,
   keywords = [],
-  lang = 'en'
-}) => (
+  lang = 'en',
+  article
+}) => { 
+
+  if (typeof window !== 'undefined') {
+    siteURL = window.location.origin;
+  }
+  
+  return (
     <Helmet
       title={title}
     >
@@ -19,7 +26,7 @@ export const Seo = ({
       {image ? <meta name="image" content={`${siteURL}/${image}`} /> : null}
       <meta name="image:alt" content={description} />
       <meta name="keywords" content={keywords.join(', ')} />
-      <meta property="og:type" content="article" />
+      <meta property="og:type" content={article ? "article": "website"} />
       <meta property="og:title" content={title} />
       <meta property="og:url" content={`${siteURL}${path ? path : ''}`} />
       <meta property="og:description" content={description} />
@@ -35,3 +42,4 @@ export const Seo = ({
       <meta name="twitter:creator" content={siteURL}></meta>
     </Helmet>
   )
+}
